@@ -28,3 +28,4 @@ Using docker compose:
             - ssh-data
         volumes:
             - ./:/app
+            - ~/.ssh:/root/ssh
