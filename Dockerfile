@@ -13,7 +13,7 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC64107
 
 # PHP && Supervisor
 RUN apt-get update && apt-get install -y git zlib1g-dev libmcrypt-dev supervisor openssh-server \
-    && mkdir -p /var/log/supervisor
+    && mkdir -p /var/log/supervisor && mkdir -p /var/run/sshd
 
 #Add composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
