@@ -14,18 +14,22 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC64107
 RUN apt-get update && apt-get install -y git zlib1g-dev libmcrypt-dev supervisor openssh-server \
     && mkdir -p /var/log/supervisor
 
-#Add composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Default config
-ADD php/php.ini /usr/local/etc/php/php.ini
-COPY nginx/default.conf /etc/nginx/conf.d/app.conf
-COPY supervisor/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
-
 RUN docker-php-ext-install bcmath mbstring opcache pcntl zip mcrypt pdo_mysql \
     ## APCu
    && pecl install apcu \
    && docker-php-ext-enable apcu
+
+#Add composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Default config
+COPY ssh/credentials.sh /root/
+COPY php/php.ini /usr/local/etc/php/php.ini
+COPY nginx/default.conf /etc/nginx/conf.d/app.conf
+COPY supervisor/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
+
+RUN chmod 755 /root/credentials.sh
+
 
 EXPOSE 9000 80 443
 
