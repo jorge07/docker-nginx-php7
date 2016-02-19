@@ -1,4 +1,4 @@
-FROM php:7.0-fpm
+FROM php:5.6-fpm
 
 ENV NGINX_VERSION 1.9.11-1~jessie
 ENV NOTVISIBLE "in users profile"
