@@ -26,6 +26,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY ssh/credentials.sh /root/
 COPY php/php.ini /usr/local/etc/php/php.ini
 COPY nginx/default.conf /etc/nginx/conf.d/app.conf
+ADD  nginx/nginx.conf /etc/nginx/
 COPY supervisor/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN chmod 755 /root/credentials.sh
