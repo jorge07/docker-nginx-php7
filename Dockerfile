@@ -29,6 +29,6 @@ RUN docker-php-ext-install bcmath mbstring opcache pcntl zip mcrypt pdo_mysql \
 
 EXPOSE 9000 80 443
 
-RUN usermod -u 1000 www-data
+# RUN usermod -u 1000 www-data
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
