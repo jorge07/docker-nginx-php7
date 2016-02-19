@@ -1,0 +1,22 @@
+2016-02-19 14:53:55,576 CRIT Supervisor running as root (no user in config file)
+2016-02-19 14:53:55,583 INFO supervisord started with pid 1
+2016-02-19 14:53:56,586 INFO spawned: 'credentials' with pid 7
+2016-02-19 14:53:56,588 INFO spawned: 'sshd' with pid 8
+2016-02-19 14:53:56,591 INFO spawned: 'php' with pid 9
+2016-02-19 14:53:56,593 INFO spawned: 'nginx' with pid 10
+2016-02-19 14:53:56,671 INFO exited: credentials (exit status 0; not expected)
+2016-02-19 14:53:57,826 INFO spawned: 'credentials' with pid 17
+2016-02-19 14:53:57,827 INFO success: sshd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-02-19 14:53:57,827 INFO success: php entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-02-19 14:53:57,827 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-02-19 14:53:57,839 INFO exited: credentials (exit status 0; not expected)
+2016-02-19 14:53:59,845 INFO spawned: 'credentials' with pid 21
+2016-02-19 14:53:59,858 INFO exited: credentials (exit status 0; not expected)
+2016-02-19 14:54:02,869 INFO spawned: 'credentials' with pid 25
+2016-02-19 14:54:02,882 INFO exited: credentials (exit status 0; not expected)
+2016-02-19 14:54:03,886 INFO gave up: credentials entered FATAL state, too many start retries too quickly
+2016-02-19 14:54:32,249 WARN received SIGTERM indicating exit request
+2016-02-19 14:54:32,250 INFO waiting for sshd, php, nginx to die
+2016-02-19 14:54:32,317 INFO stopped: nginx (exit status 0)
+2016-02-19 14:54:32,323 INFO stopped: php (exit status 0)
+2016-02-19 14:54:32,325 INFO stopped: sshd (exit status 0)
