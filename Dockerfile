@@ -8,8 +8,9 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC64107
 	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
 	&& apt-get update \
 	&& apt-get install -y ca-certificates nginx=${NGINX_VERSION} gettext-base \
-	&& git zlib1g-dev libmcrypt-dev supervisor \
-    && mkdir -p /var/log/supervisor \
+	&& git zlib1g-dev libmcrypt-dev supervisor
+
+RUN mkdir -p /var/log/supervisor \
     && rm -rf /var/lib/apt/lists/*
 
 #Add composer
