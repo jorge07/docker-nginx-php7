@@ -8,11 +8,12 @@ ENV NOTVISIBLE "in users profile"
 RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
 	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
 	&& apt-get update \
-	&& apt-get install -y \
-	&& ca-certificates nginx=${NGINX_VERSION} gettext-base git zlib1g-dev libmcrypt-dev supervisor openssh-server \
-    && mkdir -p /var/log/supervisor \
-    && mkdir -p /var/run/sshd \
-    && rm -rf /var/lib/apt/lists/*
+	&& apt-get install -y ca-certificates nginx=${NGINX_VERSION} gettext-base \
+	&& rm -rf /var/lib/apt/lists/*
+
+# PHP && Supervisor
+RUN apt-get update && apt-get install -y git zlib1g-dev libmcrypt-dev supervisor openssh-server \
+    && mkdir -p /var/log/supervisor
 
 #Add composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

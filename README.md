@@ -8,11 +8,11 @@ Composer installed with Xdebug extension && ssh server for IDE connection.
 Create a ssh volume:
 
     docker run \
-      --name ssh-data \
-      -v /root/.ssh \
-      -v ${USER_PRIVATE_KEY}:/root/.ssh/id_rsa \
-      busybox \
-      sh -c 'chown -R root:root ~/.ssh && chmod -R 400 ~/.ssh'
+        --name ssh-data \
+        -v /root/.ssh \
+        -v ${USER_PRIVATE_KEY}:/root/.ssh/id_rsa \
+        busybox \
+        sh -c 'chown -R root:root ~/.ssh && chmod -R 400 ~/.ssh'
   
 ### Run
 
