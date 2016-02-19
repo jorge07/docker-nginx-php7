@@ -3,7 +3,7 @@ FROM leos/nginx-php7-composer:latest
 RUN pecl install xdebug-beta \
     && docker-php-ext-enable xdebug
 
-RUN apt-get update && apt-get install -y openssh-server
+RUN apt-get update && apt-get install -y openssh-server \
     && mkdir -p /var/run/sshd
 
 COPY supervisor/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
