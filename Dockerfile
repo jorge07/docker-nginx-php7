@@ -24,18 +24,20 @@ RUN docker-php-ext-install bcmath mbstring opcache pcntl zip mcrypt pdo_mysql \
 #Add composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Default config
+# Default ssh config
 COPY ssh/credentials.sh /root/
-COPY php/php.ini /usr/local/etc/php/php.ini
-COPY nginx/default.conf /etc/nginx/conf.d/app.conf
-ADD  nginx/nginx.conf /etc/nginx/
-COPY supervisor/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
-
 RUN chmod 755 /root/credentials.sh
 
+# Default PHP config
+COPY php/php.ini /usr/local/etc/php/php.ini
 
-EXPOSE 9000 80 443
+# Default nginx config
+COPY nginx/default.conf /etc/nginx/conf.d/app.conf
+ADD  nginx/nginx.conf /etc/nginx/
 
-# RUN usermod -u 1000 www-data
+# Default supervisord config
+COPY supervisor/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
+
+EXPOSE 80 443
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

@@ -8,10 +8,8 @@ Composer installed
 Command:
 
     docker run -ti \
-        --volumes-from ssh-data \
         -v ./:/app \
-        -v ~/.ssh:/root/ssh
-        -p 9000:9000 \
+        -v ~/.ssh:/root/ssh \
         -p 80:90 \
         -p 443:443 \
         leos/nginx-php7-composer
@@ -23,9 +21,6 @@ Using docker compose:
         ports:
             - "80:80"
             - "443:443"
-            - "9000:9000"
-        volumes_from:
-            - ssh-data
         volumes:
             - ./:/app
             - ~/.ssh:/root/ssh
