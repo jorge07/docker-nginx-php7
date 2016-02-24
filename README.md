@@ -8,10 +8,10 @@ Composer installed with Xdebug extension && ssh server for IDE connection.
 Command:
 
     docker run -ti \
-        --volumes-from ssh-data \
         -v ./:/app \
         -v ~/.ssh:/root/ssh
         -p 9000:9000 \
+        -v ~/.ssh:/root/ssh \
         -p 80:90 \
         -p 443:443 \
         -p 2222 \

@@ -1,5 +1,7 @@
 FROM php:7.0-fpm
 
+MAINTAINER Jorge Arco <jorge.arcoma@gmail.com>
+
 ENV NGINX_VERSION 1.9.11-1~jessie
 ENV NOTVISIBLE "in users profile"
 
@@ -41,7 +43,6 @@ ADD  nginx/nginx.conf /etc/nginx/
 # Default supervisord config
 COPY supervisor/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 
-
 # SSH config
 RUN echo 'root:jarcodev' | chpasswd
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
@@ -49,7 +50,6 @@ RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/ss
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 9000 80 443 22
-
 
 RUN useradd -ms /bin/bash www
 
