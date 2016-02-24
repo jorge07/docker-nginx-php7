@@ -1,12 +1,12 @@
-FROM php:7.0-fpm
+FROM leos/nginx-php7-composer:latest
 
 MAINTAINER Jorge Arco <jorge.arcoma@gmail.com>
 
 ENV NGINX_VERSION 1.9.11-1~jessie
 ENV NOTVISIBLE "in users profile"
 
-#Add composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN apt-get update && apt-get install -y openssh-server \
+    && mkdir -p /var/run/sshd
 
 ### Install NGINX & SUPERVISOR
 RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
@@ -26,7 +26,6 @@ RUN docker-php-ext-install bcmath mbstring opcache pcntl zip mcrypt pdo_mysql \
    ## Xdebug
    && pecl install xdebug-beta \
    && docker-php-ext-enable xdebug
-
 
 # Default ssh config
 COPY ssh/credentials.sh /root/
