@@ -26,13 +26,21 @@ RUN docker-php-ext-install bcmath mbstring opcache pcntl zip mcrypt pdo_mysql \
    && docker-php-ext-enable xdebug
 
 
-# Default config
+# Default ssh config
 COPY ssh/credentials.sh /root/
+RUN chmod 755 /root/credentials.sh
+
+# Default PHP config
 COPY php/php.ini /usr/local/etc/php/php.ini
+COPY php/php-fpm.conf /usr/local/etc/php-fpm.conf
+
+# Default nginx config
 COPY nginx/default.conf /etc/nginx/conf.d/app.conf
+ADD  nginx/nginx.conf /etc/nginx/
+
+# Default supervisord config
 COPY supervisor/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN chmod 755 /root/credentials.sh
 
 # SSH config
 RUN echo 'root:jarcodev' | chpasswd
@@ -41,5 +49,10 @@ RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/ss
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 9000 80 443 22
+
+
+RUN useradd -ms /bin/bash www
+
+USER www
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
