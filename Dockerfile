@@ -30,6 +30,7 @@ RUN chmod 755 /root/credentials.sh
 
 # Default PHP config
 COPY php/php.ini /usr/local/etc/php/php.ini
+COPY php/php-fpm.conf /usr/local/etc/php-fpm.conf
 
 # Default nginx config
 COPY nginx/default.conf /etc/nginx/conf.d/app.conf
@@ -39,5 +40,9 @@ ADD  nginx/nginx.conf /etc/nginx/
 COPY supervisor/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80 443
+
+RUN useradd -ms /bin/bash www
+
+USER www
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
